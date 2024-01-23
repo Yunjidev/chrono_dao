@@ -1,0 +1,25 @@
+@use 'colors.scss' as *;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-image: url("./images/assets/background/bg_dragon.svg");
+  background-color: $color-black;
+  color: $color-white;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-position-y: 10dvh, 0;
+  backdrop-filter: brightness(.6);
+  overflow-x: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  max-width: 80vw;
+  margin: 0 auto;
+}

@@ -1,0 +1,224 @@
+@use '../../colors' as *;
+
+.home-section__wrapper,
+.game-section__wrapper {
+  display: flex;
+  justify-content: space-between;
+  max-width: 85vw;
+  margin-bottom: 5%;
+
+  .content__wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+
+    .text__wrapper {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      max-width: 1000px;
+
+      a {
+        margin-bottom: 2rem;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      .span--orange {
+        color: $color-orange;
+      }
+
+      h3 {
+        font-size: clamp(1.5rem, 3vw, 3rem);
+        margin-bottom: 2rem;
+        position: relative;
+        width: fit-content;
+
+        span {
+          font-size: larger;
+        }
+      }
+
+      h3::after {
+        content: "";
+        height: 5px;
+        background-color: $color-orange;
+        width: 100%;
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        transition: transform 0.15s ease-out;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+
+      h3:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+
+      >p {
+        letter-spacing: .1rem;
+        font-size: clamp(.8rem, 2vw, 1.2rem);
+        padding-bottom: 1rem;
+      }
+
+      >p:last-of-type {
+        margin-bottom: 2rem;
+      }
+
+      ul {
+        margin-bottom: 2rem;
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        letter-spacing: .1rem;
+        font-size: clamp(0.8rem, 2vw, 1.2rem);
+        font-weight: 500;
+        margin-bottom: 1rem;
+
+        img {
+          max-width: 60px;
+          width: 100%;
+        }
+      }
+
+      .cta-button__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(.8rem, 2vw, 1.2rem);
+
+        .logo-discord {
+          width: 32px;
+          height: 32px;
+          margin-right: 8px;
+        }
+
+        .logo-discord:hover {
+          scale: 1.1;
+          transition: cubic-bezier(0.075, 0.82, 0.165, 1) .2s;
+        }
+      }
+    }
+  }
+
+
+
+
+  .image-parallax__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+
+
+    img:nth-child(1) {
+      max-width: 700px;
+      width: 100%;
+      border-radius: .5em;
+    }
+
+    img:nth-child(2) {
+      max-width: 200px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      right: 100px;
+    }
+  }
+
+  #back-card__wrapper {
+    margin: 0 auto;
+    flex: 1;
+    justify-content: flex-end;
+    width: 100%;
+
+    img {
+      border: 3px solid $color-orange;
+      border-radius: .75em;
+      background-color: $color-light-black;
+      max-width: 250px;
+      width: 100%;
+      filter: drop-shadow(-15px 10px 4px black);
+    }
+
+    :nth-child(1) {
+      transform: rotate(-12deg);
+    }
+
+    :nth-child(2) {
+      transform: rotate(12deg) translateX(-20px);
+    }
+
+  }
+
+  .image__wrapper {
+    max-width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-width: 500px;
+      width: 100%;
+    }
+
+
+
+    svg {
+      max-width: 400px;
+      width: 100%;
+    }
+
+    svg:hover {
+      fill: white;
+    }
+
+  }
+}
+
+@media screen and (max-width:800px) {
+  .game-section__wrapper {
+    flex-direction: column;
+  }
+
+  #back-card__wrapper {
+    img {
+
+      margin-top: 2rem;
+    }
+  }
+}
+
+.card__reel {
+  --gap: 1rem;
+  display: grid;
+  gap: var(--gap);
+  grid-auto-flow: column;
+  grid-auto-columns: calc(30% - (var(--gap) / 2));
+  overflow-y: scroll;
+  scroll-snap-type: x mandatory;
+  -ms-scroll-snap-type: x;
+  scroll-padding: var(--gap);
+  height: 600px;
+
+  .card__reel>* {
+    scroll-snap-align: start;
+  }
+}
+
+.game__container{
+  height: calc(100vh - 300px);
+}
+
+

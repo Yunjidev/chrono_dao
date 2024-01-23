@@ -1,0 +1,33 @@
+@use '../../../colors' as *;
+
+nav {
+  padding: 25px 68px;
+  z-index: 10;
+
+  .nav__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      font-size: clamp(.5rem, 2vw, 1.2rem);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 60px;
+      width: 100%;
+    }
+
+    ul {
+      display: flex;
+      gap: 2rem;
+
+      .active {
+        color: $color-orange; 
+        font-weight: 600;
+      }
+    }
+  }
+}

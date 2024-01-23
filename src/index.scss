@@ -1,0 +1,26 @@
+@use 'colors.scss' as *;
+
+@font-face {
+  font-family: REM;
+  src: url('/fonts/REM-VariableFont_wght.ttf');
+}
+
+:root {
+  font-family: REM;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: $color-white;
+  text-decoration: none;
+}
+li{
+  list-style: none;
+}
