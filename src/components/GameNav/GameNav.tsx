@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import "./GameNav.scss";
 import { fetchTabsFromAPI, fetchGameDetailsFromAPI } from "../../services/api";
-
 interface Tab {
   attributes: any;
   id: string;
