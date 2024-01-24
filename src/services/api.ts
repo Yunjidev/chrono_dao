@@ -83,8 +83,6 @@ export const fetchGameSection01Data = async () => {
       return null;
     }
 
-    console.log('Section data:', sectionData);
-
     return sectionData.attributes;
   } catch (error) {
     console.error('Error fetching GameSection01 data:', error);

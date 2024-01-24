@@ -24,7 +24,6 @@ interface GameSection01Data {
 }
 
 export default function GameSection01() {
-  // État local pour stocker les données de la section du jeu et les erreurs
   const [sectionData, setSectionData] = useState<GameSection01Data | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,7 +31,6 @@ export default function GameSection01() {
     const fetchData = async () => {
       try {
         const data = await fetchGameSection01Data();
-        console.info('Fetched data:', data);
         setSectionData(data);
       } catch (error) {
         console.error('Error fetching GameSection01 data:', error);
@@ -49,7 +47,6 @@ export default function GameSection01() {
   }
 
   if (!sectionData) {
-    console.warn('No data available');
     return <div>No data available</div>;
   }
 
