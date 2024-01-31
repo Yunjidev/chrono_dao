@@ -6,12 +6,25 @@ import './DaoTimeline.scss';
 
 gsap.registerPlugin(ScrollTrigger);
 
+interface TimelineEvent {
+  logo: {
+    data: {
+      attributes: {
+        url: string;
+      };
+    };
+  };
+  text: string;
+  // Ajoutez d'autres propriétés si nécessaire
+}
+
 const DaoTimeline = () => {
-  const [timelineData, setTimelineData] = useState([]);
+  const [timelineData, setTimelineData] = useState<TimelineEvent[]>([]);
 
   useEffect(() => {
     const animateSections = () => {
-      gsap.utils.toArray('.event').forEach((event, index) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      gsap.utils.toArray('.event').forEach((event: HTMLElement) => {
         const section = event.querySelector('.event-content');
         const img = event.querySelector('.section-image');
 
@@ -32,9 +45,9 @@ const DaoTimeline = () => {
       });
     };
 
-    const fetchDataAndAnimate = async () => {
+    const fetchDataAndAnimate = async (): Promise<void> => {
       try {
-        const data = await fetchTimelineData();
+        const data: TimelineEvent[] = await fetchTimelineData();
         setTimelineData(data);
         animateSections();
       } catch (error) {
@@ -50,15 +63,15 @@ const DaoTimeline = () => {
       <h2>Timeline</h2>
       <div className="timeline">
         <div className="line"></div>
-        {timelineData.map((data, index) => (
+        {timelineData.map((_, index) => (
           <div className={`event ${index % 2 !== 0 ? 'reverse-order' : ''}`} key={index}>
             <div className="event-content">
-              <img src={`${import.meta.env.VITE_API_URL}${data?.logo?.data?.attributes.url}`} alt={`Image ${index + 1}`} className="section-image" id="timeline_image" />
+              <img src={`${import.meta.env.VITE_API_URL}${timelineData[index]?.logo?.data?.attributes?.url}`} alt={`Image ${index + 1}`} className="section-image" id="timeline_image" />
             </div>
             <div className="event-content">
               <div className="card" id="time_card">
                 <h3 id="DAOTimelineH2">{index + 1}</h3>
-                <p>{data?.text}</p>
+                <p>{timelineData[index]?.text}</p>
               </div>
             </div>
           </div>
