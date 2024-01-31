@@ -89,3 +89,53 @@ export const fetchGameSection01Data = async () => {
     throw error;
   }
 };
+
+
+export const fetchAboutDaoData = async () => {
+  try {
+    const response = await axiosInstance.get('/api/about-daos', {
+      params: {
+        populate: 'logo',
+      },
+    });
+
+    const aboutDaoData = response.data && response.data.data && response.data.data[0];
+
+    if (!aboutDaoData) {
+      console.warn('No data found for AboutDao.');
+      return null;
+    }
+
+    return aboutDaoData.attributes;
+  } catch (error) {
+    console.error('Error fetching AboutDao data:', error);
+    throw error;
+  }
+};
+
+export const fetchTimelineData = async () => {
+  try {
+    const response = await axiosInstance.get('/api/timelines', {
+      params: {
+        populate: 'logo',
+      },
+    });
+
+    console.log(response.data); // Déplacez le console.log ici
+
+    const timelineData = response.data && response.data.data;
+
+    if (!timelineData || timelineData.length === 0) {
+      console.warn('No data found for Timeline.');
+      return null;
+    }
+
+    return timelineData.map((data) => ({
+      text: data.attributes.text, // ou le nom du champ contenant le texte
+      logo: data.attributes.logo,
+    }));
+  } catch (error) {
+    console.error('Error fetching Timeline data:', error);
+    throw error;
+  }
+};
