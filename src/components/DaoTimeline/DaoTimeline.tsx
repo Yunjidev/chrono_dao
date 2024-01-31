@@ -23,11 +23,12 @@ const DaoTimeline = () => {
 
   useEffect(() => {
     const animateSections = () => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      gsap.utils.toArray('.event').forEach((event: HTMLElement) => {
+      const events = Array.from(document.querySelectorAll('.event')) as HTMLElement[];
+    
+      events.forEach((event: HTMLElement) => {
         const section = event.querySelector('.event-content');
         const img = event.querySelector('.section-image');
-
+    
         if (section && img) {
           ScrollTrigger.create({
             trigger: section,
