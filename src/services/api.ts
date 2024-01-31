@@ -130,7 +130,7 @@ export const fetchTimelineData = async () => {
       return null;
     }
 
-    return timelineData.map((data) => ({
+    return timelineData.map((data: { attributes: { text: any; logo: any; }; }) => ({
       text: data.attributes.text, // ou le nom du champ contenant le texte
       logo: data.attributes.logo,
     }));
