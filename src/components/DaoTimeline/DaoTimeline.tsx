@@ -15,7 +15,6 @@ interface TimelineEvent {
     };
   };
   text: string;
-  // Ajoutez d'autres propriétés si nécessaire
 }
 
 const DaoTimeline = () => {
