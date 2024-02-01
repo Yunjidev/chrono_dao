@@ -1,7 +1,38 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const token = import.meta.env.VITE_API_TOKEN;
+
+export interface AboutSectionData {
+  _id: number;
+  title: string;
+  subtitle: string;
+  paragraphe1: string;
+  paragraphe2: string;
+  paragraphe3: string;
+  logo: {
+    data: {
+      attributes: {
+        url: string;
+      };
+    };
+  };
+}
+
+export interface ShortSectionData {
+  _id: number;
+  title: string;
+  subtitle: string;
+  paragraphe: string;
+  logo: {
+    data: {
+      attributes: {
+        url: string;
+      };
+    };
+  };
+}
 
 export const axiosInstance = axios.create({
   baseURL: apiUrl,
@@ -188,7 +219,9 @@ export const fetchShortSectionData = async () => {
       return null;
     }
 
-    return shortSectionData.map((data: { attributes: ShortSectionData }) => ({
+    return shortSectionData.map((data: {
+      _id: any; attributes: ShortSectionData 
+}) => ({
       id: data._id,
       title: data.attributes.title,
       subtitle: data.attributes.subtitle,
