@@ -149,8 +149,6 @@ export const fetchAboutSectionData = async () => {
       },
     });
 
-    console.log('Response:', response); // Ajout de cette ligne pour déboguer
-
     const aboutSectionData = response.data.data;
 
     if (!aboutSectionData || aboutSectionData.length === 0) {
@@ -158,8 +156,10 @@ export const fetchAboutSectionData = async () => {
       return null;
     }
 
-    return aboutSectionData.map((data: { attributes: AboutSectionData }) => ({
-      id: data._id, // Utiliser _id ici
+    return aboutSectionData.map((data: {
+      _id: any; attributes: AboutSectionData 
+}) => ({
+      id: data._id,
       title: data.attributes.title,
       subtitle: data.attributes.subtitle,
       paragraphe1: data.attributes.paragraphe1,
@@ -180,8 +180,6 @@ export const fetchShortSectionData = async () => {
         populate: 'logo',
       },
     });
-
-    console.log('Response:', response);
 
     const shortSectionData = response.data.data;
 

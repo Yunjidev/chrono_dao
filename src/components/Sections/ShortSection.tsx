@@ -4,6 +4,7 @@ import './Sections.scss';
 import { fetchShortSectionData } from '../../services/api';
 
 interface ShortSectionData {
+  _id: number;
   title: string;
   subtitle: string;
   paragraphe: string;

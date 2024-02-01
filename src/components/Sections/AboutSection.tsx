@@ -4,6 +4,7 @@ import './Sections.scss';
 import { fetchAboutSectionData } from '../../services/api';
 
 interface AboutSectionData {
+  _id: number;
   title: string;
   subtitle: string;
   paragraphe1: string;
