@@ -35,14 +35,14 @@ export default function TextScroll() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setCurrentWordIndex((prevIndex) => (prevIndex + 1) % (textScrollWords.length || 1));
+      setCurrentWordIndex((prevIndex) => (prevIndex + 1) % (textScrollWords?.length || 1));
     }, 2000);
-
+  
     return () => clearTimeout(timeout);
   }, [currentWordIndex, textScrollWords]);
 
   if (!homeBannerData || !textScrollWords) {
-    return null; // Ajoutez un état de chargement si nécessaire
+    return null;
   }
 
   return (
