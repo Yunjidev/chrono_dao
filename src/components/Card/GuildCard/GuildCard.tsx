@@ -28,7 +28,7 @@ export default function GuildCard({ data }: { data: CardData }) {
     setActiveTab(tabName);
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
+  function handleMouseMove(e: MouseEvent) {
     const el = e.currentTarget as HTMLElement;
     const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -47,26 +47,26 @@ export default function GuildCard({ data }: { data: CardData }) {
     el.style.transition = "none";
     const cardGlow = el.querySelector(".card-glow");
     if (cardGlow) {
-      cardGlow.style.background = `radial-gradient(circle at ${glowX}% ${glowY}%, #ffffff30, transparent)`;
+      (cardGlow as HTMLElement).style.background = `radial-gradient(circle at ${glowX}% ${glowY}%, #ffffff30, transparent)`;
     }
-    };
+  }
 
-  const handleMouseOut = (e: MouseEvent) => {
+  function handleMouseOut(e: MouseEvent) {
     const el = e.currentTarget as HTMLElement;
     el.style.transform = "rotateX(0) rotateY(0)";
     el.style.transition = "transform ease .5s";
-  };
+  }
 
   useEffect(() => {
     const cards = document.querySelectorAll(".card__wrapper");
 
     cards?.forEach((el) => {
-      el.addEventListener("mousemove", (e: MouseEvent) => handleMouseMove(e));
-      el.addEventListener("mouseout", (e: MouseEvent) => handleMouseOut(e));
+      el.addEventListener("mousemove", handleMouseMove);
+      el.addEventListener("mouseout", handleMouseOut);
 
       return () => {
-        el.removeEventListener("mousemove", (e: MouseEvent) => handleMouseMove(e));
-        el.removeEventListener("mouseout", (e: MouseEvent) => handleMouseOut(e));
+        el.removeEventListener("mousemove", handleMouseMove);
+        el.removeEventListener("mouseout", handleMouseOut);
       };
     });
   }, []);
