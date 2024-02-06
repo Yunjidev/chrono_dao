@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import SocialMediaGuild from "../../common/SocialMedia/SocialMediaCard/SocialMediaCard";
-import { fetchHomeCardData } from '../../../services/api';
 import "./GuildCard.scss";
 
 type TabType = "info" | "bigTime";
@@ -30,7 +29,8 @@ export default function GuildCard({ data }: { data: CardData }) {
   };
 
   const handleMouseMove = (e: MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
+    const el = e.currentTarget as HTMLElement;
+    const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
@@ -43,26 +43,30 @@ export default function GuildCard({ data }: { data: CardData }) {
     const glowX = (x / rect.width) * 100;
     const glowY = (y / rect.height) * 100;
 
-    e.currentTarget.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.1)`;
-    e.currentTarget.style.transition = "none";
-    e.currentTarget.querySelector(".card-glow").style.background = `radial-gradient(circle at ${glowX}% ${glowY}%, #ffffff30, transparent)`;
-  };
+    el.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.1)`;
+    el.style.transition = "none";
+    const cardGlow = el.querySelector(".card-glow");
+    if (cardGlow) {
+      cardGlow.style.background = `radial-gradient(circle at ${glowX}% ${glowY}%, #ffffff30, transparent)`;
+    }
+    };
 
   const handleMouseOut = (e: MouseEvent) => {
-    e.currentTarget.style.transform = "rotateX(0) rotateY(0)";
-    e.currentTarget.style.transition = "transform ease .5s";
+    const el = e.currentTarget as HTMLElement;
+    el.style.transform = "rotateX(0) rotateY(0)";
+    el.style.transition = "transform ease .5s";
   };
 
   useEffect(() => {
     const cards = document.querySelectorAll(".card__wrapper");
 
     cards?.forEach((el) => {
-      el.addEventListener("mousemove", handleMouseMove);
-      el.addEventListener("mouseout", handleMouseOut);
+      el.addEventListener("mousemove", (e: MouseEvent) => handleMouseMove(e));
+      el.addEventListener("mouseout", (e: MouseEvent) => handleMouseOut(e));
 
       return () => {
-        el.removeEventListener("mousemove", handleMouseMove);
-        el.removeEventListener("mouseout", handleMouseOut);
+        el.removeEventListener("mousemove", (e: MouseEvent) => handleMouseMove(e));
+        el.removeEventListener("mouseout", (e: MouseEvent) => handleMouseOut(e));
       };
     });
   }, []);
