@@ -33,16 +33,16 @@ export default function GuildCard({ data }: { data: CardData }) {
     const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-
+  
     const midCardWidth = rect.width / 2;
     const midCardHeight = rect.height / 2;
-
+  
     const angleY = -(x - midCardWidth) / 8;
     const angleX = (y - midCardHeight) / 8;
-
+  
     const glowX = (x / rect.width) * 100;
     const glowY = (y / rect.height) * 100;
-
+  
     el.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.1)`;
     el.style.transition = "none";
     const cardGlow = el.querySelector(".card-glow");
@@ -50,26 +50,27 @@ export default function GuildCard({ data }: { data: CardData }) {
       (cardGlow as HTMLElement).style.background = `radial-gradient(circle at ${glowX}% ${glowY}%, #ffffff30, transparent)`;
     }
   }
-
+  
   function handleMouseOut(e: MouseEvent) {
     const el = e.currentTarget as HTMLElement;
     el.style.transform = "rotateX(0) rotateY(0)";
     el.style.transition = "transform ease .5s";
   }
-
+  
   useEffect(() => {
     const cards = document.querySelectorAll(".card__wrapper");
-
+  
     cards?.forEach((el) => {
-      el.addEventListener("mousemove", handleMouseMove);
-      el.addEventListener("mouseout", handleMouseOut);
-
+      el.addEventListener("mousemove", handleMouseMove as EventListener);
+      el.addEventListener("mouseout", handleMouseOut as EventListener);
+  
       return () => {
-        el.removeEventListener("mousemove", handleMouseMove);
-        el.removeEventListener("mouseout", handleMouseOut);
+        el.removeEventListener("mousemove", handleMouseMove as EventListener);
+        el.removeEventListener("mouseout", handleMouseOut as EventListener);
       };
     });
   }, []);
+  
 
   return (
     <div className="guild-card__wrapper">
