@@ -1,18 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import useIntersectionAnimation from "../../customHooks/useIntersectionAnimation";
 import CTAButton from "../common/Buttons/CTA-Button/CTAButton";
 import GuildCard from "../Card/GuildCard/GuildCard";
 import { fetchHomeCardData, fetchTeamData } from '../../services/api';
 
-interface TeamData {
-  _id: number;
-  paragraphe: string;
-}
-
 export default function Cards() {
   const [loading, setLoading] = useState(true);
-  const [cardDataList, setCardDataList] = useState([]);
-  const [teamParagraph, setTeamParagraph] = useState("");
+  const [cardDataList, setCardDataList] = useState<any[]>([]);
+  const [teamParagraph, setTeamParagraph] = useState<string>("");
   const cardsRef = useIntersectionAnimation(0, handleFirstDivAnimation);
 
   useEffect(() => {
@@ -45,8 +41,10 @@ export default function Cards() {
     cards?.forEach((card, i) => {
       setTimeout(() => {
         if (inView) {
-          card.style.transform = "rotateY(0deg)";
-          card.style.transition = "transform ease .5s";
+          // Cast card en HTMLElement pour accéder à la propriété style
+          const cardElement = card as HTMLElement;
+          cardElement.style.transform = "rotateY(0deg)";
+          cardElement.style.transition = "transform ease .5s";
         }
       }, i * 200);
     });
