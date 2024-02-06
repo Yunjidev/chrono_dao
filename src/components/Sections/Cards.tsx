@@ -41,7 +41,6 @@ export default function Cards() {
     cards?.forEach((card, i) => {
       setTimeout(() => {
         if (inView) {
-          // Cast card en HTMLElement pour accéder à la propriété style
           const cardElement = card as HTMLElement;
           cardElement.style.transform = "rotateY(0deg)";
           cardElement.style.transition = "transform ease .5s";
