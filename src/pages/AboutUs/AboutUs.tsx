@@ -45,7 +45,6 @@ export default function AboutUs() {
           <OracleBanner />
           <ShortSection/>
           {/* <ShortSection01/> */}
-          <OracleBanner />
           {/* <ShortSection02/>
           <ShortSection03/> */}
           <AnimateClockie />
